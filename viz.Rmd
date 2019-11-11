@@ -1,0 +1,85 @@
+---
+title: "GOV282 Freedom House"
+author: "Maggie X. Wang"
+date: "11/5/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+library(xml2)
+library(XML)
+library(readr)
+library(readxl)
+```
+
+```{r}
+setwd("C:/Users/xiaon/OneDrive/Courses/201901/GOV282/Group Project/viz")
+
+fh_congress <- read_excel("fh_congress.xlsx")
+fh_news <- read_excel("fh_googlenews.xlsx")
+```
+
+```{r}
+#mentions of FH in congressional records
+plot_mentions_congress <- fh_congress %>% 
+  ggplot(aes(x=congress, y=mentions, color=type)) + 
+  geom_line() + 
+  geom_point(size=2) + 
+  theme_minimal() + 
+  theme(legend.box = "vertical",
+        legend.position = c(1,1.1),
+        legend.justification = c("right", "top"),
+        legend.background = element_blank(),
+        legend.box.background = element_blank(),
+        legend.title = element_blank()) + 
+  scale_x_continuous(breaks = c(104,105,106,107,108,109,110,111,112,113,114,115),
+                     labels = c("104th","105th","106th","107th","108th","109th",
+                            "110th","111th","112th","113th","114th","115th"),
+                     limits = c(104, 116)) + 
+  scale_y_continuous(limits = c(0,50)) + 
+  scale_color_brewer(palette = "Dark2") + 
+  coord_fixed(ratio=0.1) + 
+  labs(title = "Mentions of Freedom House in Congressional Records",
+       subtitle = "104th-115th Congress (1995-2018)",
+       caption = "Data Source: Congress.gov",
+       x = "Congress",
+       y = "Number of Mentions")
+
+plot_mentions_congress
+```
+
+```{r}
+#mentions of FH or FIW in the media
+#see README.md for search terms
+plot_mentions_media <- fh_news %>% 
+  ggplot(aes(x=year, y=searches)) + 
+  geom_line(color="darkred") + 
+  geom_point(size=2, color="darkred") + 
+  theme_minimal() + 
+  scale_x_continuous(breaks = c(2002:2019), 
+                     labels = c("2002","'03","'04","'05","'06","'07","'08","'09",
+                                "'10","'11","'12","'13","'14","'15","'16","'17","'18","2019")) + 
+  scale_y_continuous(limits = c(0,6000),
+                     breaks = c(0,500,2000,4000,6000)) + 
+  labs(title = "Media Mentions of Freedom House Democratic Indices, 2002-Today",
+       caption = "Data Source: Google News Search",
+       x = "Year",
+       y = "Number of Search Results") + 
+  coord_fixed(ratio=0.0015)
+
+plot_mentions_media
+```
+
+```{r}
+#save plots
+ggsave(filename="fh_congress.png",plot=plot_mentions_congress)
+ggsave(filename="fh_media.png",plot=plot_mentions_media)
+```
+
