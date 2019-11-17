@@ -20,10 +20,11 @@ library(readxl)
 ```
 
 ```{r}
-setwd("C:/Users/xiaon/OneDrive/Courses/201901/GOV282/Group Project/viz")
+setwd("C:/Users/xiaon/OneDrive/Courses/201901/GOV282/Group Project/freedomhouse")
 
 fh_congress <- read_excel("fh_congress.xlsx")
 fh_news <- read_excel("fh_googlenews.xlsx")
+indices_sector <- read_excel("indices_sector.xlsx")
 ```
 
 ```{r}
@@ -51,8 +52,6 @@ plot_mentions_congress <- fh_congress %>%
        caption = "Data Source: Congress.gov",
        x = "Congress",
        y = "Number of Mentions")
-
-plot_mentions_congress
 ```
 
 ```{r}
@@ -68,18 +67,36 @@ plot_mentions_media <- fh_news %>%
                                 "'10","'11","'12","'13","'14","'15","'16","'17","'18","2019")) + 
   scale_y_continuous(limits = c(0,6000),
                      breaks = c(0,500,2000,4000,6000)) + 
-  labs(title = "Media Mentions of Freedom House Democratic Indices, 2002-Today",
+  labs(title = "Media Mentions of Freedom House Indices as a Democracy Indices",
        caption = "Data Source: Google News Search",
        x = "Year",
        y = "Number of Search Results") + 
   coord_fixed(ratio=0.0015)
+```
 
-plot_mentions_media
+
+```{r}
+plot_indices_sector <- indices_sector %>% 
+  ggplot(aes(fill=index, y=mentions, x=sector)) + 
+  geom_bar(position="fill",stat="identity", width = .3) + 
+  coord_flip() + 
+  theme_minimal() + 
+  scale_fill_manual("Index", 
+                    values = c("FITW" = "darkolivegreen", 
+                               "Polity" = "darkgoldenrod")) + 
+  scale_y_continuous(labels = c("0","25%","50%","75%","100%")) + 
+  labs(title = "Percentage of Total Mentions by Sector",
+       subtitle = "Freedom in the World vs. Polity",
+       caption = "Data Source: Google News Search, Google Scholar, Congress.gov",
+       y = " ",
+       x = "Sector") + 
+  theme(aspect.ratio = .5)
 ```
 
 ```{r}
 #save plots
 ggsave(filename="fh_congress.png",plot=plot_mentions_congress)
 ggsave(filename="fh_media.png",plot=plot_mentions_media)
+ggsave(filename="indices_sector.png",plot=plot_indices_sector)
 ```
 
