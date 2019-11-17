@@ -20,7 +20,7 @@ library(readxl)
 ```
 
 ```{r}
-setwd("C:/Users/xiaon/OneDrive/Courses/201901/GOV282/Group Project/freedomhouse")
+setwd("C:/Users/xiaon/OneDrive/Courses/201901/GOV282/Group Project/freedomhouse/data_raw")
 
 fh_congress <- read_excel("fh_congress.xlsx")
 fh_news <- read_excel("fh_googlenews.xlsx")
@@ -94,6 +94,8 @@ plot_indices_sector <- indices_sector %>%
 ```
 
 ```{r}
+setwd("C:/Users/xiaon/OneDrive/Courses/201901/GOV282/Group Project/freedomhouse/deliverables")
+
 #save plots
 ggsave(filename="fh_congress.png",plot=plot_mentions_congress)
 ggsave(filename="fh_media.png",plot=plot_mentions_media)
