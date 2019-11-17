@@ -1,5 +1,5 @@
 # freedomhouse
-Code and data behind visualizations for GOV282' Freedom House Indices group project
+Code and data behind visualizations for GOV282 Freedom House Indices group project
 
 ## Search terms for media mentions of Freedom House indices as democraty indices
 * ("Freedom House" AND ("ranking" OR "score" OR "democracy" OR "democratic")) OR ("Freedom in the World" AND ("report" OR "democracy" OR "democratic"))  
