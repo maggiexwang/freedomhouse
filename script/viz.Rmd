@@ -67,7 +67,7 @@ plot_mentions_media <- fh_news %>%
                                 "'10","'11","'12","'13","'14","'15","'16","'17","'18","2019")) + 
   scale_y_continuous(limits = c(0,6000),
                      breaks = c(0,500,2000,4000,6000)) + 
-  labs(title = "Media Mentions of Freedom House Indices as a Democracy Indices",
+  labs(title = "Media Mentions of Freedom House Indices as Democracy Indices",
        caption = "Data Source: Google News Search",
        x = "Year",
        y = "Number of Search Results") + 
