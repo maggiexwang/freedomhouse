@@ -5,7 +5,8 @@ Code and data behind visualizations for GOV282 Freedom House Indices group proje
 * ("Freedom House" AND ("ranking" OR "score" OR "democracy" OR "democratic")) OR ("Freedom in the World" AND ("report" OR "democracy" OR "democratic"))  
 * Restriction by year: 1/1/20xx - 12/31/20xx
 
-## Search terms for the Freedom in the World v. Polity comparison
+## Search terms for the Freedom in the World v. Polity v. EIU comparison
 * FITW: ("Freedom in the world report" OR "Freedom in the world index" OR "Freedom in the world indices")
+* The Economist Intelligence Unit Democracy Index: ("EIU" AND "Democracy Index")
 * Polity: ("Polity IV" OR "Polity 4" OR "Polity III" OR "Polity II" OR "The Polity Project")
 * Search in congressional records was manually executed because Congree.gov's search bar does not accommodate boolean search terms

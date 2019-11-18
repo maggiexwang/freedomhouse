@@ -76,17 +76,20 @@ plot_mentions_media <- fh_news %>%
 
 
 ```{r}
+indices_sector$index <- factor(indices_sector$index, levels = c("FITW", "EIU", "Polity"))
+
 plot_indices_sector <- indices_sector %>% 
   ggplot(aes(fill=index, y=mentions, x=sector)) + 
   geom_bar(position="fill",stat="identity", width = .3) + 
   coord_flip() + 
   theme_minimal() + 
   scale_fill_manual("Index", 
-                    values = c("FITW" = "darkolivegreen", 
-                               "Polity" = "darkgoldenrod")) + 
+                    values = c("EIU" = "darkolivegreen", 
+                               "FITW" = "darkgoldenrod",
+                               "Polity" = "navy")) + 
   scale_y_continuous(labels = c("0","25%","50%","75%","100%")) + 
-  labs(title = "Percentage of Total Mentions by Sector",
-       subtitle = "Freedom in the World vs. Polity",
+  labs(title = "Percentage (%) of Total Mentions by Sector",
+       subtitle = "Freedom in the World vs. Polity vs. EIU Democracy Index",
        caption = "Data Source: Google News Search, Google Scholar, Congress.gov",
        y = " ",
        x = "Sector") + 
